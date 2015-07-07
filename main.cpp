@@ -4,11 +4,11 @@
 // STL Read & Write Methods
 #include <StlAPI_Writer.hxx>
 
-Standard_Integer main (int argc, char *argv[]) {
+int step2stl(char *in, char *out) {
 
   // Read from STEP
   STEPControl_Reader reader;
-  IFSelect_ReturnStatus stat = reader.ReadFile(argv[1]);
+  IFSelect_ReturnStatus stat = reader.ReadFile(in);
 
   Standard_Integer NbRoots = reader.NbRootsForTransfer();
   Standard_Integer NbTrans = reader.TransferRoots();
@@ -18,7 +18,13 @@ Standard_Integer main (int argc, char *argv[]) {
   StlAPI_Writer stlWriter = StlAPI_Writer();
   // stlWriter.SetCoefficient(0.0001);
   stlWriter.ASCIIMode() = Standard_False;
-  stlWriter.Write( Original_Solid, argv[2]);
+  stlWriter.Write( Original_Solid, out);
 
+  return 1;
 }
 
+
+Standard_Integer main (int argc, char *argv[]) {
+  step2stl(argv[1], argv[2]);
+  return 0;
+}

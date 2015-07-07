@@ -85,9 +85,21 @@ endif
 EXE = step2stl
 
 
+ifeq (Darwin,$(findstring Darwin,$(UNAME)))
+	SHARED=-dynamiclib -flat_namespace
+	SHAREDLIB=step2stl.so.dylib
+else
+	SHARED=-fPIC -shared
+	SHAREDLIB=step2stl.so
+endif
+
 
 
 all:	$(EXE)
+
+lib:
+	c++ -I/usr/local/include/oce -O3 -L/usr/local/lib -lTKBRep -lTKG2d -lTKG3d -lTKGeomBase -lTKMath -lTKMesh -lTKSTEP -lTKSTEP209 -lTKSTEPAttr -lTKSTEPBase -lTKSTL -lTKXSBase -lTKernel -o $(SHAREDLIB) $(SHARED) lib.cpp
+	ffi-generate -f lib.hpp -l $(SHAREDLIB) | sed "s/exports.\([^\.]*\)\.[^ ]*/exports.\1/" > node-ffi.js
 
 debug:	$(EXE)
 
