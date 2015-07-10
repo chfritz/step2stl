@@ -5,6 +5,8 @@ Example program of how to convert ISO 10303 STEP files (AP203 and AP 214) to STL
 
 You need OpenCascade.
 
+### Ubuntu
+
 On Ubuntu you can try to install opencascade from apt-get. This might
 work:
 
@@ -15,21 +17,23 @@ libopencascade-ocaf-lite-6.5.0 libopencascade-visualization-6.5.0 \
 opencascade-draw
 ```
 
-But you can also compile from source:
+### Mac OSX
+
+```
+brew install oce
+```
+
+### Compiling OpenCascade from source:
+
+To compile from source:
 
 ```
 git clone https://github.com/tpaviot/oce.git
-cd oce
-git checkout 13965711913c4590549de562e55c922fb0889d24
-cd ..
 mkdir oce_build
 cd oce_build
 cmake ../oce
 sudo make install
 ```
-
-Here we use a specific commit from the OpenCascade Community Edition,
-but probably anyone after that would work, too (not tested).
 
 
 ## Compiling
@@ -48,4 +52,3 @@ just use it as:
 ```
 ./step2stl STEPFILENAME STLFILENAME
 ```
-
