@@ -30,12 +30,12 @@ endif
 # were probably compiled with 4.4). on ifab.parc.com i just made 4.4
 # the default.
 
-ifeq (Ubuntu,$(findstring Ubuntu,$(UNAME)))
+#ifeq (Ubuntu,$(findstring Ubuntu,$(UNAME)))
 #UBUNTUDISTRO := $(shell lsb_release -c)
 #ifeq (oneiric,$(findstring oneiric,$(UBUNTUDISTRO)))
-CXX=gcc-4.4
+CXX=g++-4.9
 #endif
-endif
+#endif
 
 #---------------------------------------------------------------------
 #targets

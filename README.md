@@ -17,21 +17,19 @@ libopencascade-ocaf-lite-6.5.0 libopencascade-visualization-6.5.0 \
 opencascade-draw
 ```
 
-### Mac OSX
-
-```
-brew install oce
-```
 
 ### Compiling OpenCascade from source:
 
-To compile from source:
+To compile from source (on OSX make sure to use gcc, not clang):
 
 ```
 git clone https://github.com/tpaviot/oce.git
-mkdir oce_build
-cd oce_build
-cmake ../oce
+git checkout 13965711913c4590549de562e55c922fb0889d24
+cd ..
+cd oce
+mkdir build
+cd build
+cmake ..
 sudo make install
 ```
 
