@@ -99,7 +99,7 @@ all:	$(EXE)
 
 lib:
 	c++ -I/usr/local/include/oce -O3 -L/usr/local/lib -lTKBRep -lTKG2d -lTKG3d -lTKGeomBase -lTKMath -lTKMesh -lTKSTEP -lTKSTEP209 -lTKSTEPAttr -lTKSTEPBase -lTKSTL -lTKXSBase -lTKernel -o $(SHAREDLIB) $(SHARED) lib.cpp
-	ffi-generate -f lib.hpp -l $(SHAREDLIB) | sed "s/exports.\([^\.]*\)\.[^ ]*/exports.\1/" > node-ffi.js
+	ffi-generate -f lib.hpp -l $(SHAREDLIB) -m step2stl -L /Library/Developer/CommandLineTools/usr/lib > node-ffi.js
 
 debug:	$(EXE)
 
