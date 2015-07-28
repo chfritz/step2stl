@@ -98,8 +98,8 @@ endif
 all:	$(EXE)
 
 lib:
-	c++ -I/usr/local/include/oce -O3 -L/usr/local/lib -lTKBRep -lTKG2d -lTKG3d -lTKGeomBase -lTKMath -lTKMesh -lTKSTEP -lTKSTEP209 -lTKSTEPAttr -lTKSTEPBase -lTKSTL -lTKXSBase -lTKernel -o $(SHAREDLIB) $(SHARED) lib.cpp
-	ffi-generate -f lib.hpp -l $(SHAREDLIB) -m step2stl -L /Library/Developer/CommandLineTools/usr/lib > node-ffi.js
+	g++ -I/usr/local/include/oce -O3 -L/usr/local/lib $(OCCLIBS) -o $(SHAREDLIB) $(SHARED) lib.cpp
+	ffi-generate -f lib.hpp -l $(SHAREDLIB) -m step3stl -L /Library/Developer/CommandLineTools/usr/lib > node-ffi.js
 
 debug:	$(EXE)
 
@@ -123,4 +123,6 @@ obj/%.o: %.cpp %.d %.h
 clean:
 	bash -c 'rm -f *.o $(OBJS) $(EXE)'
 
-
+install:
+	cp $(SHAREDLIB) /usr/local/lib
+	ldconfig
