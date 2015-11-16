@@ -13,8 +13,8 @@ LDFLAGS += -L/usr/lib/opencas -L/usr/lib ${OCCLIBS}
 
 else
 
-CXXFLAGS += -I/usr/local/include/oce
-LDFLAGS += -L/usr/local/lib ${OCCLIBS}
+CXXFLAGS += -I/usr/local/include/oce -I/usr/include
+LDFLAGS += -L/usr/local/lib -L/usr/lib ${OCCLIBS}
 
 endif
 
