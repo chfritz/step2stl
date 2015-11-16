@@ -50,3 +50,8 @@ just use it as:
 ```
 ./step2stl STEPFILENAME STLFILENAME
 ```
+
+## Using in node.js
+
+Run `make lib` to create the dynamic library and ffi file for use in node.js.
+
