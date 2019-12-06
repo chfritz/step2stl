@@ -3,6 +3,9 @@
 #include <TopoDS_Shape.hxx>
 // STL Read & Write Methods
 #include <StlAPI_Writer.hxx>
+#include <BRepMesh_IncrementalMesh.hxx>
+
+#include <iostream>
 
 int step2stl(char *in, char *out) {
 
@@ -16,15 +19,24 @@ int step2stl(char *in, char *out) {
 
   // Write to STL
   StlAPI_Writer stlWriter = StlAPI_Writer();
-  // stlWriter.SetCoefficient(0.0001);
+  //stlWriter.SetCoefficient(0.0001);
   stlWriter.ASCIIMode() = Standard_False;
+
+  BRepMesh_IncrementalMesh Mesh( Original_Solid, 0.01 );
+
+  Mesh.Perform();
+
   stlWriter.Write( Original_Solid, out);
 
-  return 1;
+  return 0;
 }
 
 
 Standard_Integer main (int argc, char *argv[]) {
-  step2stl(argv[1], argv[2]);
-  return 0;
+  if (argc != 3) {
+      std::cerr << "Usage: " << argv[0] << " file.step file.stl" << std::endl;
+      return 1;
+  }
+
+  return step2stl(argv[1], argv[2]);
 }

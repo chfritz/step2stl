@@ -8,8 +8,8 @@ OCCLIBS=-lTKBRep -lTKG2d -lTKG3d -lTKGeomBase \
 ifeq "$(OCEINCLUDE)" ""
 
 #CXX=gcc-4.4
-CXXFLAGS += -I/usr/include/opencascade
-LDFLAGS += -L/usr/lib/opencas -L/usr/lib ${OCCLIBS}
+CXXFLAGS += -I/usr/local/Cellar/opencascade/7.3.0p3/include/opencascade
+LDFLAGS += -L/usr/local/Cellar/opencascade/7.3.0p3/lib -L/usr/lib ${OCCLIBS}
 
 else
 
@@ -33,7 +33,8 @@ endif
 #ifeq (Ubuntu,$(findstring Ubuntu,$(UNAME)))
 #UBUNTUDISTRO := $(shell lsb_release -c)
 #ifeq (oneiric,$(findstring oneiric,$(UBUNTUDISTRO)))
-CXX=g++-4.9
+#CXX=g++-4.9
+CXX=clang++ -std=c++11 -stdlib=libc++
 #endif
 #endif
 
