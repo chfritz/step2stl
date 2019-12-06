@@ -1,6 +1,12 @@
 UNAME := $(shell uname -a)
 OCEINCLUDE := $(shell if test -d /usr/local/include/oce; then echo "/usr/local/include/oce"; else echo ""; fi)
 
+OPENCASCADEINC?=/usr/include/opencascade
+OPENCASCADELIB?=/usr/lib/opencas
+
+$(info Using OPENCASCADEINC as "${OPENCASCADEINC}")
+$(info Using OPENCASCADELIB as "${OPENCASCADELIB}")
+
 OCCLIBS=-lTKBRep -lTKG2d -lTKG3d -lTKGeomBase \
 -lTKMath -lTKMesh -lTKSTEP -lTKSTEP209 \
 -lTKSTEPAttr -lTKSTEPBase -lTKSTL -lTKXSBase -lTKernel \
@@ -8,8 +14,8 @@ OCCLIBS=-lTKBRep -lTKG2d -lTKG3d -lTKGeomBase \
 ifeq "$(OCEINCLUDE)" ""
 
 #CXX=gcc-4.4
-CXXFLAGS += -I/usr/local/Cellar/opencascade/7.3.0p3/include/opencascade
-LDFLAGS += -L/usr/local/Cellar/opencascade/7.3.0p3/lib -L/usr/lib ${OCCLIBS}
+CXXFLAGS += -I$(OPENCASCADEINC)
+LDFLAGS += -L$(OPENCASCADELIB) -L/usr/lib ${OCCLIBS}
 
 else
 
