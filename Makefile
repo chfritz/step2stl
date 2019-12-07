@@ -1,6 +1,12 @@
 UNAME := $(shell uname -a)
 OCEINCLUDE := $(shell if test -d /usr/local/include/oce; then echo "/usr/local/include/oce"; else echo ""; fi)
 
+OPENCASCADEINC?=/usr/include/opencascade
+OPENCASCADELIB?=/usr/lib/opencas
+
+$(info Using OPENCASCADEINC as "${OPENCASCADEINC}")
+$(info Using OPENCASCADELIB as "${OPENCASCADELIB}")
+
 OCCLIBS=-lTKBRep -lTKG2d -lTKG3d -lTKGeomBase \
 -lTKMath -lTKMesh -lTKSTEP -lTKSTEP209 \
 -lTKSTEPAttr -lTKSTEPBase -lTKSTL -lTKXSBase -lTKernel \
@@ -8,8 +14,8 @@ OCCLIBS=-lTKBRep -lTKG2d -lTKG3d -lTKGeomBase \
 ifeq "$(OCEINCLUDE)" ""
 
 #CXX=gcc-4.4
-CXXFLAGS += -I/usr/include/opencascade
-LDFLAGS += -L/usr/lib/opencas -L/usr/lib ${OCCLIBS}
+CXXFLAGS += -I$(OPENCASCADEINC)
+LDFLAGS += -L$(OPENCASCADELIB) -L/usr/lib ${OCCLIBS}
 
 else
 
@@ -33,7 +39,8 @@ endif
 #ifeq (Ubuntu,$(findstring Ubuntu,$(UNAME)))
 #UBUNTUDISTRO := $(shell lsb_release -c)
 #ifeq (oneiric,$(findstring oneiric,$(UBUNTUDISTRO)))
-CXX=g++-4.9
+#CXX=g++-4.9
+CXX=clang++ -std=c++11 -stdlib=libc++
 #endif
 #endif
 
